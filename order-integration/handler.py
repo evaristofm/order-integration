@@ -16,11 +16,12 @@ def transforma_dados(dados):
     for pedido in dados:
         pedido_final.append({
                 "id": pedido['id'],
+                "origem": "nome_ferramenta",
                 "valor": float(pedido['valor']),
-                "data": datetime.strptime(pedido['data'], '%d/%m/%Y'),
+                "data_fato": datetime.strptime(pedido['data'], '%d/%m/%Y').strftime("%Y-%m-%d"),
                 "frete": float(pedido['frete']),
                 "desconto": int(re.sub(r'[^0-9]', '', pedido['desconto'])) if isinstance(pedido['desconto'], str) else None,
-                "status": pedido['status']
+                "status": 'finalizado' if pedido['status'] in ('finished', 'in progress') else pedido['status']
         })
     return pedido_final
             
