@@ -56,7 +56,7 @@ será mostrado as funções lambdas que foram criadas na aws.
 ### Invocando endpoint
 
 Depois de realizar o deploy, você pode criar uma requisisão via HTTP
-fornecendo como parametro o arquivo 'erp_data.json', para os dados serem lidos, transformados
+passando o endpoint e como parametro o arquivo 'erp_data.json', para os dados serem lidos, transformados
  esalvos em um bucket S3.
 
 ![postman_endpoint](https://github.com/evaristofm/api-brasilprev/assets/46290279/d75bb0d6-9329-4226-903d-701bd8b84e01)
