@@ -1,0 +1,97 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "description": "- Documentação do CRM para o desafio técnico",
+    "title": "FlashCRM | CRM Fictício",
+    "version": "v1",
+    "contact": {}
+  },
+  "servers": [
+    {
+      "url": "http://httpbin.org"
+    }
+  ],
+  "paths": {
+    "/get": {
+      "get": {
+        "summary": "Pedidos",
+        "description": "Pedidos",
+        "operationId": "pedidos",
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/post": {
+      "post": {
+        "summary": "Pedidos",
+        "description": "Pedidos",
+        "operationId": "pedidos1",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "example": "10001",
+                    "pattern": "^[\\\\w|\\\\-|\\\\_]*$"
+                  },
+                  "origem": {
+                    "type": "string",
+                    "example": "nome_ferramenta",
+                    "pattern": "^[a-z]+(?:_[a-z]+)*$"
+                  },
+                  "data_fato": {
+                    "type": "string",
+                    "example": "2001-01-01",
+                    "pattern": "^(?:[1-9]\\\\d{3}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1\\\\d|2[0-8])|(?:0[13-9]|1[0-2])-(?:29|30)|(?:0[13578]|1[02])-31)|(?:[1-9]\\\\d(?:0[48]|[2468][048]|[13579][26])|(?:[2468][048]|[13579][26])00)-02-29)$|^((?:[1-9]\\\\d{3}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1\\\\d|2[0-8])|(?:0[13-9]|1[0-2])-(?:29|30)|(?:0[13578]|1[02])-31)|(?:[1-9]\\\\d(?:0[48]|[2468][048]|[13579][26])|(?:[2468][048]|[13579][26])00)-02-29) (?:[01]\\\\d|2[0-3]):[0-5]\\\\d:[0-5]\\\\d[.][0-9]\\\\d\\\\d(?:Z| [+-][01]\\\\d:[0-5]\\\\d| UTC))$"
+                  },
+                  "status": {
+                    "type": "string",
+                    "example": "finalizado",
+                    "pattern": "^aberto|concluido|cancelado|outro$"
+                  },
+                  "valor": {
+                    "type": "number",
+                    "example": 100
+                  },
+                  "desconto": {
+                    "type": "number",
+                    "example": 0
+                  },
+                  "frete": {
+                    "type": "number",
+                    "example": 0
+                  }
+                }
+              },
+              "examples": {
+                "Pedidos": {
+                  "value": {
+                    "data_fato": "2001-01-01",
+                    "desconto": 0,
+                    "frete": 0,
+                    "id": "10001",
+                    "origem": "nome_ferramenta",
+                    "status": "finalizado",
+                    "valor": 100
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    }
+  },
+  "tags": []
+}

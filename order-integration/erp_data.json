@@ -1,0 +1,74 @@
+[
+    {
+        "id": 10001,
+        "valor": 152.00,
+        "data": "10/01/2024",
+        "frete": 5.90,
+        "desconto": "5%",
+        "status": "finished"
+    },
+    {
+        "id": 10002,
+        "valor": 250.00,
+        "data": "10/01/2024",
+        "frete": 5.90,
+        "desconto": "R$50,00",
+        "status": "finished"
+    },
+    {
+        "id": 10003,
+        "valor": 145.50,
+        "data": "11/01/2024",
+        "frete": 5.90,
+        "desconto": "3%",
+        "status": "finished"
+    },
+    {
+        "id": 10004,
+        "valor": 120.00,
+        "data": "11/01/2024",
+        "frete": 5.90,
+        "desconto": null,
+        "status": "finished"
+    },
+    {
+        "id": 10005,
+        "valor": 50.00,
+        "data": "11/01/2024",
+        "frete": 5.90,
+        "desconto": null,
+        "status": "finished"
+    },
+    {
+        "id": 10006,
+        "valor": 35.00,
+        "data": "12/01/2024",
+        "frete": 0.00,
+        "desconto": null,
+        "status": "finished"
+    },
+    {
+        "id": 10007,
+        "valor": 35.00,
+        "data": "12/01/2024",
+        "frete": 0.00,
+        "desconto": null,
+        "status": "finished"
+    },
+    {
+        "id": 10008,
+        "valor": 180.00,
+        "data": "12/01/2024",
+        "frete": 5.90,
+        "desconto": "10%",
+        "status": "in progress"
+    },
+    {
+        "id": 10009,
+        "valor": 9.90,
+        "data": "12/01/2024",
+        "frete": 5.90,
+        "desconto": null,
+        "status": "in progress"
+    }
+]
