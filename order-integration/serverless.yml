@@ -1,0 +1,32 @@
+# "org" ensures this Service is used with the correct Serverless Framework Access Key.
+org: evaristofm
+# "app" enables Serverless Framework Dashboard features and sharing them with other Services.
+app: order-integration
+# "service" is the name of this project. This will also be added to your AWS resource names.
+service: order-integration
+
+provider:
+  name: aws
+  runtime: python3.12
+  region: us-east-1
+  iamRoleStatements:
+    - Effect: "Allow"
+      Action: "s3:*"
+      Resource: "arn:aws:s3:::{--seuBucket--}/*"
+
+functions:
+  erpHandler:
+    handler: handler.erp_handler
+    events:
+      - httpApi:
+          path: /
+          method: post
+  
+  crmHandler:
+    handler: handler.crm_handler
+    events:
+      - eventBridge:
+          schedule: rate(10 minutes)
+          input:
+            key1: value1
+
