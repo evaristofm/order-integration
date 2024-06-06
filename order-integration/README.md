@@ -10,89 +10,67 @@ authorName: 'Serverless, Inc.'
 authorAvatar: 'https://avatars1.githubusercontent.com/u/13742415?s=200&v=4'
 -->
 
-# Serverless Framework Python HTTP API on AWS
+# Order Integration com Serverless Framework Python
 
-This template demonstrates how to make a simple HTTP API with Python running on AWS Lambda and API Gateway using the Serverless Framework.
+Projeto para integrar dados de pedidos entre um ERP e um CRM utilizando AWS Lambda e S3 com Serverless Framework.
 
-This template does not include any kind of persistence (database). For more advanced examples, check out the [serverless/examples repository](https://github.com/serverless/examples/) which includes DynamoDB, Mongo, Fauna and other examples.
+![arquitetura](https://github.com/evaristofm/api-brasilprev/assets/46290279/8d73d9f8-84da-48c4-9d85-e778cf5126f8)
 
-## Usage
 
-### Deployment
+## Pré-requisitos
+- [x] Serverless Framework
+
+
+### Configurando o projeto
+
+Clone o projeto Order Integration
+
+```
+$ cd pasta/onde/vc/guarda/seus/projetos
+$ git https://github.com/evaristofm/order-integration.git
+
+```
+
+Adaptando o projeto:
+- [] Vá no arquivo order-integration/serverless.yml
+- [] Em Resource mude o ARN do bucket s3 para um endereço de bucket existente na aws Resource: "arn:aws:s3:::{seu-bucket-name}/*"
+- [] Vá para order-integration/handler.py
+- [] Altera a variavel S3_BUCKET = '{seu-bucket-name}' definindo o nome do seu bucket
+
+
+Realizando o deploy do projeto
+
+- [] Dentro da pasta order-integration/order-integration
+- [] Execute o comando serverless deploy
 
 ```
 serverless deploy
-```
-
-After deploying, you should see output similar to:
 
 ```
-Deploying "aws-python-http-api" to stage "dev" (us-east-1)
+No final da execução sera fornecido o endpoint da Api Gateway e
+será mostrado as funções lambdas que foram criadas na aws.
 
-✔ Service deployed to stack aws-python-http-api-dev (85s)
+![deploy_lambdas](https://github.com/evaristofm/api-brasilprev/assets/46290279/9b4beec1-e421-45e6-a3c0-ed8c87cabecd)
 
-endpoint: GET - https://6ewcye3q4d.execute-api.us-east-1.amazonaws.com/
-functions:
-  hello: aws-python-http-api-dev-hello (2.3 kB)
-```
 
-_Note_: In current form, after deployment, your API is public and can be invoked by anyone. For production deployments, you might want to configure an authorizer. For details on how to do that, refer to [http event docs](https://www.serverless.com/framework/docs/providers/aws/events/apigateway/).
+### Invocando endpoint
 
-### Invocation
+Depois de realizar o deploy, você pode criar uma requisisão via HTTP
+passando o endpoint e como parametro o arquivo 'erp_data.json', para os dados serem lidos, transformados
+ esalvos em um bucket S3.
 
-After successful deployment, you can call the created application via HTTP:
+![postman_endpoint](https://github.com/evaristofm/api-brasilprev/assets/46290279/d75bb0d6-9329-4226-903d-701bd8b84e01)
 
-```
-curl https://xxxxxxx.execute-api.us-east-1.amazonaws.com/
-```
 
-Which should result in response similar to the following (removed `input` content for brevity):
+Confira no seu Bucket se existe um arquivo chamado 'new_erp_data.json'
 
-```json
-{
-  "message": "Go Serverless v4.0! Your function executed successfully!"
-}
-```
+![bucket](https://github.com/evaristofm/api-brasilprev/assets/46290279/b98fe211-e090-4bd8-9fbe-394db0ab3bff)
 
-### Local development
 
-You can invoke your function locally by using the following command:
+A partir desse arquivo sera gerado um novo arquivo chamado 'crm_swagger.json',
+onde o lambda 'crm_handler' a cada 10 min será responsável em ler o 'new_erp_data.json'
+e gerar/atualizar o arquivo 'crm_swagger.json'.
 
-```
-serverless invoke local --function hello
-```
+![bucket_crm_swagger](https://github.com/evaristofm/api-brasilprev/assets/46290279/2abb5530-9b0b-47e8-af5c-3bbac8f9a1f2)
 
-Which should result in response similar to the following:
 
-```json
-{
-  "statusCode": 200,
-  "body": "{\n  \"message\": \"Go Serverless v4.0! Your function executed successfully!\"}"
-}
-```
-
-Alternatively, it is also possible to emulate API Gateway and Lambda locally by using `serverless-offline` plugin. In order to do that, execute the following command:
-
-```
-serverless plugin install -n serverless-offline
-```
-
-It will add the `serverless-offline` plugin to `devDependencies` in `package.json` file as well as will add it to `plugins` in `serverless.yml`.
-
-After installation, you can start local emulation with:
-
-```
-serverless offline
-```
-
-To learn more about the capabilities of `serverless-offline`, please refer to its [GitHub repository](https://github.com/dherault/serverless-offline).
-
-### Bundling dependencies
-
-In case you would like to include 3rd party dependencies, you will need to use a plugin called `serverless-python-requirements`. You can set it up by running the following command:
-
-```
-serverless plugin install -n serverless-python-requirements
-```
-
-Running the above will automatically add `serverless-python-requirements` to `plugins` section in your `serverless.yml` file and add it as a `devDependency` to `package.json` file. The `package.json` file will be automatically created if it doesn't exist beforehand. Now you will be able to add your dependencies to `requirements.txt` file (`Pipfile` and `pyproject.toml` is also supported but requires additional configuration) and they will be automatically injected to Lambda package during build process. For more details about the plugin's configuration, please refer to [official documentation](https://github.com/UnitedIncome/serverless-python-requirements).
