@@ -5,6 +5,7 @@ from datetime import datetime, date
 
 
 s3_client = boto3.client("s3")
+S3_BUCKET = 'seu-bucket-name'
 
 def transforma_dados(dados):
     pedido_final = []
@@ -28,8 +29,7 @@ def json_serial(obj):
 
 
 def erp_handler(event, context):
-    bucket = 'erp-crm-data'
-    
+
     body = event.get('body')
     body_pedidos_dict = json.loads(body)
 
@@ -42,8 +42,31 @@ def erp_handler(event, context):
         indent=4,
         default=json_serial).encode('UTF-8'))
 
-    s3_client.put_object(Bucket=bucket, Key=filename, Body=uploadByteStream)
+    s3_client.put_object(Bucket=S3_BUCKET, Key=filename, Body=uploadByteStream)
 
     print(pedidos)
+
+    return {'statusCode': 200}
+
+
+def crm_handler(event, context):
+    """Ler arquivo com os dados transformados no s3"""
+    
+    object_key = 'new_erp_data' + '.json'
+
+    file_content = json.loads(s3_client.get_object(
+        Bucket=S3_BUCKET, Key=object_key)['Body'].read())
+    
+    print(file_content)
+
+    """Envio dos dados para s3 com o arquivo crm_swagger.json"""
+    filename = 'crm_swagger' + '.json'
+
+    uploadByteStream = bytes(json.dumps(
+        file_content,
+        indent=4,
+        default=str).encode('UTF-8'))
+
+    s3_client.put_object(Bucket=S3_BUCKET, Key=filename, Body=uploadByteStream)
 
     return {'statusCode': 200}
