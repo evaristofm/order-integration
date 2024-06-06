@@ -14,6 +14,8 @@ authorAvatar: 'https://avatars1.githubusercontent.com/u/13742415?s=200&v=4'
 
 Projeto para integrar dados de pedidos entre um ERP e um CRM utilizando AWS Lambda e S3 com Serverless Framework.
 
+![arquitetura](https://github.com/evaristofm/api-brasilprev/assets/46290279/8d73d9f8-84da-48c4-9d85-e778cf5126f8)
+
 
 ## Pré-requisitos
 - [x] Serverless Framework
@@ -54,8 +56,8 @@ será mostrado as funções lambdas que foram criadas na aws.
 ### Invocando endpoint
 
 Depois de realizar o deploy, você pode criar uma requisisão via HTTP
-fornecendo como parametro o arquivo 'erp_data.json', para os dados serem transformados
-em um bucket S3 
+fornecendo como parametro o arquivo 'erp_data.json', para os dados serem lidos, transformados
+ esalvos em um bucket S3.
 
 ![postman_endpoint](https://github.com/evaristofm/api-brasilprev/assets/46290279/d75bb0d6-9329-4226-903d-701bd8b84e01)
 
