@@ -7,7 +7,7 @@ service: order-integration
 
 provider:
   name: aws
-  runtime: python3.12
+  runtime: python3.11
   region: us-east-1
   iamRoleStatements:
     - Effect: "Allow"
@@ -30,3 +30,14 @@ functions:
           input:
             key1: value1
 
+	
+plugins:
+  - serverless-python-requirements
+custom:
+  pythonRequirements:
+    dockerizePip: non-linux
+
+package:
+  exclude:
+    - node_modules/**
+    - venv/**

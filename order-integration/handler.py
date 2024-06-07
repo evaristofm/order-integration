@@ -1,6 +1,7 @@
 import re
 import json
 import boto3
+import requests
 import logging
 from datetime import datetime, date
 
@@ -74,17 +75,17 @@ def crm_handler(event, context):
         file_content = json.loads(s3_client.get_object(
             Bucket=S3_BUCKET, Key=object_key)['Body'].read())
         
-        print(file_content)
+        print("FILE CONTENT", file_content)
 
-        """Envio dos dados para s3 com o arquivo crm_swagger.json"""
-        filename = 'crm_swagger' + '.json'
+        """Envio dos dados para o CRM"""
+        url = "http://httpbin.org/post"
+        payload = json.dumps(file_content)
+        headers = {
+            'Content-Type': 'application/json'
+        }
+        response = requests.request("POST", url, headers=headers, data=payload)
 
-        uploadByteStream = bytes(json.dumps(
-            file_content,
-            indent=4,
-            default=json_serial).encode('UTF-8'))
-
-        s3_client.put_object(Bucket=S3_BUCKET, Key=filename, Body=uploadByteStream)
+        print("Retorno do CRM", response.json())
 
         return {
             "statusCode": 200,
