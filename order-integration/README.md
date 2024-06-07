@@ -67,10 +67,10 @@ Confira no seu Bucket se existe um arquivo chamado 'new_erp_data.json'
 ![bucket](https://github.com/evaristofm/api-brasilprev/assets/46290279/b98fe211-e090-4bd8-9fbe-394db0ab3bff)
 
 
-A partir desse arquivo sera gerado um novo arquivo chamado 'crm_swagger.json',
-onde o lambda 'crm_handler' a cada 10 min será responsável em ler o 'new_erp_data.json'
-e gerar/atualizar o arquivo 'crm_swagger.json'.
+A partir desse arquivo sera gerado os dados serão lidos e enviados para o endpoint do CRM,
+onde o lambda 'crm_handler' a cada 10 min será responsável em enviar os dados.
 
-![bucket_crm_swagger](https://github.com/evaristofm/api-brasilprev/assets/46290279/2abb5530-9b0b-47e8-af5c-3bbac8f9a1f2)
+![envio_dados_crm](https://github.com/evaristofm/order-integration/assets/46290279/1b3eebcb-4bfd-459e-9cf3-b56516d1a894)
+
 
 
