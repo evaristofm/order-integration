@@ -14,7 +14,7 @@ authorAvatar: 'https://avatars1.githubusercontent.com/u/13742415?s=200&v=4'
 
 Projeto para integrar dados de pedidos entre um ERP e um CRM utilizando AWS Lambda e S3 com Serverless Framework.
 
-![arquitetura](https://github.com/evaristofm/api-brasilprev/assets/46290279/8d73d9f8-84da-48c4-9d85-e778cf5126f8)
+![estrutura](https://github.com/evaristofm/order-integration/assets/46290279/9a2c25da-a9ad-48cb-aa91-88848c99ac35)
 
 
 ## Pré-requisitos
